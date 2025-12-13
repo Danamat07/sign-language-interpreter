@@ -1,0 +1,8 @@
+numpy>=1.23
+opencv-python
+tensorflow==2.13.0
+scikit-learn
+mediapipe
+PySide6
+pyttsx3
+pillow

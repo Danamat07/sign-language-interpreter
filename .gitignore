@@ -1,0 +1,14 @@
+# Virtual environment
+venv/
+
+# Python cache
+__pycache__/
+*.pyc
+
+# Models & data (prea mari pentru git)
+data/
+models/
+
+# OS
+.DS_Store
+Thumbs.db
