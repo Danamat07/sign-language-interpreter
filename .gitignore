@@ -1,14 +1,21 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.sqlite3
+
 # Virtual environment
 venv/
 
-# Python cache
-__pycache__/
-*.pyc
-
-# Models & data (prea mari pentru git)
-data/
-models/
+# IDE
+.vscode/
+.idea/
 
 # OS
 .DS_Store
 Thumbs.db
+
+# Models & data (vor fi generate ulterior)
+models/
+data/
