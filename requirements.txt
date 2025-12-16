@@ -6,3 +6,4 @@ mediapipe
 PySide6
 pyttsx3
 pillow
+tqdm
