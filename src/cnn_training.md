@@ -418,7 +418,7 @@ plt.tight_layout()
 plt.show()
   ```
 
-![alt text](../models/matrix/absolute-confusion-matrix.png)
+![alt text](/src/matrix/absolute-confusion-matrix.png)
 
 **Normalized Confusion Matrix**
 
@@ -451,7 +451,7 @@ plt.tight_layout()
 plt.show()
   ```
 
-![alt text](../models/matrix/normalized-confusion-matrix.png)
+![alt text](/src/matrix/normalized-confusion-matrix.png)
 
 ### Save Final Model
 
