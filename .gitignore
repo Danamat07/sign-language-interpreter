@@ -19,3 +19,6 @@ Thumbs.db
 # Models & data (vor fi generate ulterior)
 models/
 data/
+
+# firebase key
+src/config

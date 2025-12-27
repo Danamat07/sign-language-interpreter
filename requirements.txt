@@ -7,3 +7,4 @@ PySide6
 pyttsx3
 pillow
 tqdm
+firebase-admin
