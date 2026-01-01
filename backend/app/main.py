@@ -8,12 +8,12 @@ app = FastAPI(
     description="Backend pentru Firebase Auth + Firestore"
 )
 
-# CORS (pentru frontend ulterior)
+# CORS
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],
     allow_credentials=True,
-    allow_methods=["*"],   # include OPTIONS
+    allow_methods=["*"],
     allow_headers=["*"],
 )
 

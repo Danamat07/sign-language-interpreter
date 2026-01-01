@@ -19,8 +19,10 @@ Thumbs.db
 # Models & data (vor fi generate ulterior)
 models/*.keras
 models/*.json
-models/confusion_matrix
 data/
 
 # firebase key
-src/config
+backend/app/config
+
+# env val
+.env
