@@ -1,18 +1,18 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from backend.app.api.users import router as users_router
+from backend.app.api.predict import router as predict_router
 
 """
-Sets up FastAPI application.
-Adds CORS so frontend can communicate with backend.
-Includes all /users endpoints.
+Main FastAPI app for ASL Recognition backend.
+Includes database and ML routers.
 """
 
 # initialize fastapi app
 app = FastAPI(
     title="ASL Recognition Backend",
     version="1.0.0",
-    description="Backend for Firebase Auth + Firestore"
+    description="Backend for Firebase Auth + Firestore + ASL CNN Predictions"
 )
 
 # enable CORS (cross-origin resource sharing).
@@ -30,5 +30,6 @@ app.add_middleware(
 def root():
     return {"status": "backend running"}
 
-# include the users router for all /users endpoints
+# include routers
 app.include_router(users_router)
+app.include_router(predict_router)
