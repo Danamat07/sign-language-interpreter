@@ -9,9 +9,9 @@ from pathlib import Path
 # director root
 BASE_DIR = Path(__file__).resolve().parent.parent
 # path model cnn
-MODEL_PATH = BASE_DIR / "models" / "cnn_model.keras"
+MODEL_PATH = BASE_DIR / "backend" / "models" / "cnn_model.keras"
 # path clase
-CLASSES_PATH = BASE_DIR / "models" / "classes.json"
+CLASSES_PATH = BASE_DIR / "backend" / "models" / "classes.json"
 
 # mdelul antrenat
 model = tf.keras.models.load_model(MODEL_PATH)

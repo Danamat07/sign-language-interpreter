@@ -17,8 +17,8 @@ venv/
 Thumbs.db
 
 # Models & data (vor fi generate ulterior)
-models/*.keras
-models/*.json
+backend/models/*.keras
+backend/models/*.json
 data/
 
 # firebase key
