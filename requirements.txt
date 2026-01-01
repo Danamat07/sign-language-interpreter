@@ -12,3 +12,4 @@ firebase-admin
 fastapi
 uvicorn
 python-multipart
+python-dotenv

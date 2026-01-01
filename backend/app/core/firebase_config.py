@@ -1,6 +1,9 @@
 import os
+from dotenv import load_dotenv
 import firebase_admin
 from firebase_admin import credentials, firestore
+
+load_dotenv()
 
 FIREBASE_CRED_PATH = os.getenv("FIREBASE_CRED_PATH")
 
