@@ -58,7 +58,7 @@ def detect_and_predict(frame, draw=True):
 
             # preprocess + CNN prediction
             input_tensor = preprocess_hand_image(hand_crop)
-            letter, confidence = predict_hand(input_tensor)
+            letter, confidence = predict_letter(input_tensor)
 
             final_confidence = confidence
 
