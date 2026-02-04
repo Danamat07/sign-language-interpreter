@@ -1,63 +1,143 @@
+/* Importăm un font mai modern */
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Inter:wght@300;400;600&display=swap');
+
 * {
     box-sizing: border-box;
-    font-family: Arial, Helvetica, sans-serif;
+    margin: 0;
+    padding: 0;
 }
 
 body {
-    background: #121212;
-    color: #ffffff;
+    /* Gradient animat pe fundal */
+    background: radial-gradient(circle at center, #1a1a2e 0%, #0f0f1a 100%);
+    color: #e0e0e0;
+    font-family: 'Inter', sans-serif;
     height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
+    overflow: hidden;
 }
 
-.auth-container {
-    background: #1e1e1e;
-    padding: 2rem;
-    width: 350px;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0,0,0,0.6);
+/* Containerul principal cu efect de sticlă (Glassmorphism) */
+.auth-container, .profile-container {
+    background: rgba(255, 255, 255, 0.03);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 2.5rem;
+    width: 400px;
+    border-radius: 20px;
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5);
+    animation: fadeIn 0.8s ease-out;
 }
 
-.auth-container h1 {
+h1 {
+    font-family: 'Orbitron', sans-serif;
     text-align: center;
-    margin-bottom: 1.5rem;
+    margin-bottom: 2rem;
+    letter-spacing: 2px;
+    background: linear-gradient(90deg, #00d2ff, #3a7bd5);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
 }
 
-.auth-container input {
+/* Stiluri pentru Input-uri */
+input {
     width: 100%;
-    padding: 10px;
-    margin-bottom: 1rem;
-    border-radius: 4px;
-    border: none;
+    padding: 12px 16px;
+    margin-bottom: 1.2rem;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    color: white;
+    outline: none;
+    transition: all 0.3s ease;
 }
 
-.auth-container button {
+input:focus {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: #00d2ff;
+    box-shadow: 0 0 15px rgba(0, 210, 255, 0.3);
+}
+
+/* Butonul Modern */
+button {
     width: 100%;
-    padding: 10px;
-    background: #4caf50;
+    padding: 14px;
+    background: linear-gradient(135deg, #00d2ff 0%, #3a7bd5 100%);
     color: white;
     border: none;
-    border-radius: 4px;
+    border-radius: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
     cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+    margin-top: 10px;
 }
 
-.auth-container button:hover {
-    background: #43a047;
+button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 20px rgba(0, 210, 255, 0.4);
 }
 
-#message {
-    margin-top: 1rem;
-    text-align: center;
+button:active {
+    transform: translateY(0);
 }
 
+/* Butonul de Delete (Danger) */
+button.danger {
+    background: linear-gradient(135deg, #ff416c 0%, #ff4b2b 100%);
+}
+
+button.danger:hover {
+    box-shadow: 0 10px 20px rgba(255, 75, 43, 0.4);
+}
+
+/* Link-uri și text de redirect */
 .redirect {
-    margin-top: 1rem;
+    margin-top: 1.5rem;
     text-align: center;
+    font-size: 0.9rem;
+    color: #888;
 }
 
 .redirect a {
-    color: #4caf50;
+    color: #00d2ff;
     text-decoration: none;
+    font-weight: 600;
+    transition: color 0.3s;
+}
+
+.redirect a:hover {
+    color: #ffffff;
+    text-shadow: 0 0 10px rgba(0, 210, 255, 0.8);
+}
+
+.warning {
+    color: #ffb74d;
+    background: rgba(255, 183, 77, 0.1);
+    padding: 10px;
+    border-radius: 8px;
+    margin-bottom: 1.5rem;
+    font-size: 0.85rem;
+    text-align: center;
+}
+
+/* Animație de intrare */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.background-glow {
+    position: absolute;
+    top: -10%;
+    left: -10%;
+    width: 40%;
+    height: 40%;
+    background: radial-gradient(circle, rgba(0, 210, 255, 0.1) 0%, transparent 70%);
+    z-index: -1;
+    filter: blur(50px);
 }

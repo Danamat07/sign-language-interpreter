@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ASL Recognition | Live Camera</title>
+    <link rel="stylesheet" href="css/camera.css">
+</head>
+<body>
+    <div class="camera-container">
+        <h1>ASL Live Recognition</h1>
+
+        <video id="webcam" autoplay playsinline></video>
+
+        <canvas id="overlay"></canvas>
+
+        <p id="predicted-letter">Letter: </p>
+
+        <p id="message"></p>
+
+        <button id="back-btn">Back to Profile</button>
+    </div>
+
+    <script type="module" src="js/camera.js"></script>
+</body>
+</html>
