@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ASL Recognition | Profile</title>
+    <link rel="stylesheet" href="css/profile.css">
+</head>
+<body>
+
+    <div class="profile-container">
+        <h1>My Profile</h1>
+
+        <div id="profile-info">
+            <p><strong>Username:</strong> <span id="username"></span></p>
+            <p><strong>Email:</strong> <span id="email"></span></p>
+        </div>
+
+        <div class="actions">
+            <button id="logout-btn">Logout</button>
+            <button id="delete-btn" class="danger">Delete Account</button>
+        </div>
+
+        <p id="message"></p>
+    </div>
+
+    <script type="module" src="js/users/getProfile.js"></script>
+    <script type="module" src="js/auth/logout.js"></script>
+</body>
+</html>
