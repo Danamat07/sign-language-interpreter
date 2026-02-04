@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ASL Recognition | Login</title>
+    <link rel="stylesheet" href="css/auth.css">
+</head>
+<body>
+
+    <div class="auth-container">
+        <h1>Login</h1>
+
+        <form id="login-form">
+            <input type="email" id="email" placeholder="Email" required />
+            <input type="password" id="password" placeholder="Password" required />
+
+            <button type="submit">Login</button>
+        </form>
+
+        <p id="message"></p>
+
+        <p class="redirect">
+            Don't have an account?
+            <a href="signup.html">Sign up</a>
+        </p>
+
+        <p class="redirect">
+            <a href="forgot-password.html">Forgot password?</a>
+        </p>
+    </div>
+
+    <script type="module" src="js/auth/login.js"></script>
+</body>
+</html>
