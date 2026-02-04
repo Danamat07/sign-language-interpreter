@@ -64,3 +64,10 @@ button.danger:hover {
     margin-top: 1rem;
     text-align: center;
 }
+
+.warning {
+    margin-bottom: 1.5rem;
+    color: #ff5252;
+    font-weight: bold;
+    text-align: center;
+}
