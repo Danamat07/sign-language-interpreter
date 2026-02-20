@@ -10,6 +10,8 @@ const confidenceEl = document.getElementById("confidence");
 const messageEl = document.getElementById("message");
 const backBtn = document.getElementById("back-btn");
 
+const checkBtn = document.getElementById("check-btn");
+
 const token = localStorage.getItem("firebaseToken");
 
 if (!token) {
@@ -19,13 +21,20 @@ if (!token) {
 }
 
 
-// majority voting
+// buffers
 
 const VOTING_FRAMES = 7;
 
 const predictionBuffer = [];
 
 const confidenceBuffer = [];
+
+
+// current stable prediction
+
+let currentLetter = null;
+
+let currentConfidence = null;
 
 
 // canvas size
@@ -35,7 +44,7 @@ overlay.width = 640;
 overlay.height = 480;
 
 
-// start webcam
+// start camera
 
 async function startCamera() {
 
@@ -89,8 +98,6 @@ async function predictFrame() {
     const tmpCtx = tmpCanvas.getContext("2d");
 
 
-    // mirror frame
-
     tmpCtx.translate(tmpCanvas.width, 0);
 
     tmpCtx.scale(-1, 1);
@@ -141,8 +148,6 @@ async function predictFrame() {
         let confidence = data.confidence || 0;
 
 
-        // add to buffer
-
         if (letter) {
 
             predictionBuffer.push(letter);
@@ -161,8 +166,6 @@ async function predictFrame() {
         }
 
 
-        // majority voting
-
         let stableLetter = "-";
 
         let stableConfidence = 0;
@@ -171,7 +174,6 @@ async function predictFrame() {
         if (predictionBuffer.length > 0) {
 
             const counts = {};
-
 
             predictionBuffer.forEach(
 
@@ -202,17 +204,17 @@ async function predictFrame() {
         }
 
 
-        // update UI
+        currentLetter = stableLetter;
+
+        currentConfidence = stableConfidence;
+
 
         letterEl.textContent = `Letter: ${stableLetter}`;
-
 
         confidenceEl.textContent =
 
             `Confidence: ${(stableConfidence * 100).toFixed(2)} %`;
 
-
-        // draw annotated frame
 
         const img = new Image();
 
@@ -236,9 +238,7 @@ async function predictFrame() {
 
             ctx.save();
 
-
             ctx.scale(-1, 1);
-
 
             ctx.drawImage(
 
@@ -253,7 +253,6 @@ async function predictFrame() {
                 overlay.height
 
             );
-
 
             ctx.restore();
 
@@ -280,6 +279,84 @@ video.addEventListener(
     "loadeddata",
 
     predictFrame
+
+);
+
+
+// SAVE LETTER BUTTON
+
+checkBtn.addEventListener(
+
+    "click",
+
+    async () => {
+
+        if (!currentLetter || currentLetter === "-") {
+
+            alert("No letter detected");
+
+            return;
+
+        }
+
+
+        const confirmSave = confirm(
+
+            `Confirm letter "${currentLetter}" with confidence ${(currentConfidence * 100).toFixed(2)}% ?`
+
+        );
+
+
+        if (!confirmSave) return;
+
+
+        try {
+
+            const response = await fetch(
+
+                `${API_BASE_URL}/users/recognize-letter`,
+
+                {
+
+                    method: "POST",
+
+                    headers: {
+
+                        "Authorization": `Bearer ${token}`,
+
+                        "Content-Type": "application/json"
+
+                    },
+
+                    body: JSON.stringify({
+
+                        letter: currentLetter,
+
+                        confidence: currentConfidence
+
+                    })
+
+                }
+
+            );
+
+
+            const result = await response.json();
+
+
+            messageEl.textContent = result.message;
+
+        }
+
+        catch (e) {
+
+            console.error(e);
+
+            messageEl.textContent = "Save failed";
+
+        }
+
+    }
 
 );
 

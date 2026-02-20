@@ -99,9 +99,11 @@ def forgot_password(email: str):
 
 # SAVE RECOGNIZED LETTER
 @router.post("/recognize-letter")
-def recognize_letter(letter: str, user=Depends(verify_firebase_token)):
+def recognize_letter(data: dict, user=Depends(verify_firebase_token)):
 
-    # validate letter
+    letter = data.get("letter")
+    confidence = data.get("confidence")
+
     if letter not in ALPHABET:
         raise HTTPException(
             status_code=400,
@@ -128,6 +130,13 @@ def recognize_letter(letter: str, user=Depends(verify_firebase_token)):
     # update user progress
     user_ref.update({
         f"recognizedLetters.{letter}": True
+    })
+
+    # save detailed progress
+    user_ref.collection("history").add({
+        "letter": letter,
+        "confidence": confidence,
+        "timestamp": firestore.SERVER_TIMESTAMP
     })
 
     # update global statistics
