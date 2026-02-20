@@ -6,20 +6,26 @@
     <link rel="stylesheet" href="css/camera.css">
 </head>
 <body>
-    <div class="camera-container">
-        <h1>ASL Live Recognition</h1>
 
-        <video id="webcam" autoplay playsinline></video>
+<div class="camera-container">
 
-        <canvas id="overlay"></canvas>
+    <h1>ASL Live Recognition</h1>
 
-        <p id="predicted-letter">Letter: </p>
+    <video id="webcam" autoplay playsinline></video>
 
-        <p id="message"></p>
+    <canvas id="overlay"></canvas>
 
-        <button id="back-btn">Back to Profile</button>
-    </div>
+    <p id="predicted-letter">Letter: -</p>
 
-    <script type="module" src="js/camera.js"></script>
+    <p id="confidence">Confidence: -</p>
+
+    <p id="message"></p>
+
+    <button id="back-btn">Back to Profile</button>
+
+</div>
+
+<script type="module" src="js/camera.js"></script>
+
 </body>
 </html>
