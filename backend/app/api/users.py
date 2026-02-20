@@ -102,7 +102,6 @@ def forgot_password(email: str):
 def recognize_letter(data: dict, user=Depends(verify_firebase_token)):
 
     letter = data.get("letter")
-    confidence = data.get("confidence")
 
     if letter not in ALPHABET:
         raise HTTPException(
@@ -132,14 +131,13 @@ def recognize_letter(data: dict, user=Depends(verify_firebase_token)):
         f"recognizedLetters.{letter}": True
     })
 
-    # save detailed progress
+    # save history for user's personal tracking
     user_ref.collection("history").add({
         "letter": letter,
-        "confidence": confidence,
         "timestamp": firestore.SERVER_TIMESTAMP
     })
 
-    # update global statistics
+    # update global statistics – simple count only
     db.collection("statistics").document("global").set({
         letter: firestore.Increment(1)
     }, merge=True)

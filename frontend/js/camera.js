@@ -284,80 +284,43 @@ video.addEventListener(
 
 
 // SAVE LETTER BUTTON
-
 checkBtn.addEventListener(
-
     "click",
-
     async () => {
-
         if (!currentLetter || currentLetter === "-") {
-
             alert("No letter detected");
-
             return;
-
         }
 
-
         const confirmSave = confirm(
-
-            `Confirm letter "${currentLetter}" with confidence ${(currentConfidence * 100).toFixed(2)}% ?`
-
+            `Confirm letter "${currentLetter}"?`
         );
-
 
         if (!confirmSave) return;
 
-
         try {
-
             const response = await fetch(
-
                 `${API_BASE_URL}/users/recognize-letter`,
-
                 {
-
                     method: "POST",
-
                     headers: {
-
                         "Authorization": `Bearer ${token}`,
-
                         "Content-Type": "application/json"
-
                     },
-
                     body: JSON.stringify({
-
-                        letter: currentLetter,
-
-                        confidence: currentConfidence
-
+                        letter: currentLetter  // only letter, no confidence
                     })
-
                 }
-
             );
 
-
             const result = await response.json();
-
-
             messageEl.textContent = result.message;
 
-        }
-
-        catch (e) {
-
+        } catch (e) {
             console.error(e);
-
             messageEl.textContent = "Save failed";
-
         }
-
     }
-
 );
 
 
