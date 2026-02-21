@@ -7,30 +7,35 @@
 </head>
 <body>
 
-    <div class="profile-container">
-        <h1>My Profile</h1>
+    <div class="background-glow"></div>
 
-        <div id="profile-info">
-            <p><strong>Username:</strong> <span id="username"></span></p>
-            <p><strong>Email:</strong> <span id="email"></span></p>
+    <div class="page-wrapper">
+
+        <!-- Cardul principal -->
+        <div class="profile-container">
+            <h1>My Profile</h1>
+
+            <div id="profile-info">
+                <p><strong>Username:</strong> <span id="username"></span></p>
+                <p><strong>Email:</strong> <span id="email"></span></p>
+            </div>
+
+            <div class="actions">
+                <button id="logout-btn">Logout</button>
+                <a href="delete-account.html">
+                    <button class="danger">Delete Account</button>
+                </a>
+            </div>
+
+            <p id="message"></p>
         </div>
 
-        <div class="actions">
-            <button id="logout-btn">Logout</button>
-            <a href="delete-account.html">
-                <button class="danger">Delete Account</button>
-            </a>
+        <!-- Butoanele de navigare, în afara cardului -->
+        <div class="nav-buttons">
+            <button onclick="location.href='statistics.html'">View Live Statistics</button>
+            <button onclick="location.href='camera.html'">Go to Camera</button>
         </div>
 
-        <button onclick="location.href='statistics.html'">
-            View Live Statistics
-        </button>
-
-        <button onclick="location.href='camera.html'">
-            Go to camera
-        </button>
-
-        <p id="message"></p>
     </div>
 
     <script type="module" src="js/users/getProfile.js"></script>

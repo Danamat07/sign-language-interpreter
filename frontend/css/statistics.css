@@ -27,34 +27,39 @@ body {
     filter: blur(60px);
 }
 
+.statistics-container {
+    background: rgba(255, 255, 255, 0.015);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    padding: 2.5rem;
+    width: 900px;
+    max-width: 95vw;
+    border-radius: 20px;
+    box-shadow: 0 25px 60px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255,255,255,0.05);
+    animation: fadeIn 0.8s ease-out;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+}
+
 h1 {
     font-family: 'Orbitron', sans-serif;
     text-align: center;
-    margin-bottom: 2rem;
     letter-spacing: 2px;
     background: linear-gradient(90deg, #00d2ff, #3a7bd5);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
 }
 
-#predicted-letter {
-    font-family: 'Inter', sans-serif;
-    font-size: 2rem;
-    font-weight: 600;
-    text-align: center;
-    margin-top: 1rem;
-    color: rgba(0, 210, 255, 0.6);
-    letter-spacing: 1px;
-}
-
-#confidence {
-    font-family: 'Inter', sans-serif;
-    font-size: 1.1rem;
-    font-weight: 600;
-    text-align: center;
-    margin-top: 0.4rem;
-    color: rgba(0, 210, 255, 0.6);
-    letter-spacing: 1px;
+#statsChart {
+    width: 100% !important;
+    height: auto !important;
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    padding: 1rem;
 }
 
 button {
@@ -62,7 +67,7 @@ button {
     width: auto;
     min-width: 200px;
     padding: 12px 28px;
-    margin: 10px auto 0 auto;
+    margin: 0 auto;
     background: rgba(0, 210, 255, 0.08);
     color: #00d2ff;
     border: 1px solid rgba(0, 210, 255, 0.3);
@@ -86,4 +91,16 @@ button:hover {
 
 button:active {
     transform: translateY(0);
+}
+
+#message {
+    font-size: 0.85rem;
+    color: rgba(0, 210, 255, 0.6);
+    text-align: center;
+    min-height: 1rem;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
 }
