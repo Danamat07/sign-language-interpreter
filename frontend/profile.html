@@ -7,38 +7,63 @@
 </head>
 <body>
 
-    <div class="background-glow"></div>
+<div class="background-glow"></div>
 
-    <div class="page-wrapper">
+<div class="page-wrapper">
 
-        <!-- Cardul principal -->
-        <div class="profile-container">
-            <h1>My Profile</h1>
+    <div class="profile-layout">
 
-            <div id="profile-info">
-                <p><strong>Username:</strong> <span id="username"></span></p>
-                <p><strong>Email:</strong> <span id="email"></span></p>
+        <!-- LEFT: profile card -->
+        <div class="left-column">
+            <div class="profile-container">
+
+                <h1>My Profile</h1>
+
+                <div id="profile-info">
+                    <p>
+                        <strong>Username:</strong>
+                        <span id="username"></span>
+                    </p>
+                    <p>
+                        <strong>Email:</strong>
+                        <span id="email"></span>
+                    </p>
+                </div>
+
+                <div class="actions">
+                    <button id="logout-btn">Logout</button>
+                    <a href="delete-account.html">
+                        <button class="danger">Delete Account</button>
+                    </a>
+                </div>
+
+                <p id="message"></p>
+
             </div>
-
-            <div class="actions">
-                <button id="logout-btn">Logout</button>
-                <a href="delete-account.html">
-                    <button class="danger">Delete Account</button>
-                </a>
-            </div>
-
-            <p id="message"></p>
         </div>
 
-        <!-- Butoanele de navigare, în afara cardului -->
-        <div class="nav-buttons">
-            <button onclick="location.href='statistics.html'">View Live Statistics</button>
-            <button onclick="location.href='camera.html'">Go to Camera</button>
+        <!-- RIGHT: recognized letters card -->
+        <div class="letters-panel">
+            <div class="letters-container">
+                <h2 class="letters-title">Recognized Letters</h2>
+                <div id="letters-list">
+                    <!-- populated by JS -->
+                </div>
+            </div>
         </div>
 
     </div>
 
-    <script type="module" src="js/users/getProfile.js"></script>
-    <script type="module" src="js/auth/logout.js"></script>
+    <!-- Nav buttons fixed bottom center -->
+    <div class="nav-buttons">
+        <button onclick="location.href='statistics.html'">View Live Statistics</button>
+        <button onclick="location.href='camera.html'">Go to Camera</button>
+    </div>
+
+</div>
+
+<script type="module" src="js/users/getProfile.js"></script>
+<script type="module" src="js/auth/logout.js"></script>
+
 </body>
 </html>

@@ -17,23 +17,38 @@ body {
     overflow: hidden;
 }
 
-/* Wrapper care ține cardul + butoanele aliniate */
 .page-wrapper {
     display: flex;
     flex-direction: column;
+    justify-content: center;
     align-items: center;
-    gap: 1.2rem;
     animation: fadeIn 0.8s ease-out;
+    width: 100vw;
+    min-height: 100vh;
+    padding: 2rem 2rem 8rem;
 }
 
-/* Cardul principal */
+.profile-layout {
+    display: flex;
+    gap: 2rem;
+    align-items: center;
+    justify-content: center;
+}
+
+.left-column {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
 .profile-container {
     background: rgba(255, 255, 255, 0.015);
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
     border: 1px solid rgba(255, 255, 255, 0.06);
     padding: 2.5rem;
-    width: 400px;
+    width: 380px;
     border-radius: 20px;
     box-shadow: 0 25px 60px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255,255,255,0.05);
 }
@@ -66,7 +81,6 @@ h1 {
     margin-right: 6px;
 }
 
-/* Butoane în general */
 button {
     width: 100%;
     padding: 13px;
@@ -95,7 +109,6 @@ button:active {
     transform: translateY(0);
 }
 
-/* Butoanele Logout + Delete din card */
 .actions {
     display: flex;
     flex-direction: column;
@@ -124,12 +137,20 @@ button.danger:hover {
     color: #fff;
 }
 
-/* Butoanele de navigare de sub card */
+/* Nav buttons fixate jos-centru, una sub alta */
 .nav-buttons {
+    position: fixed;
+    bottom: 2rem;
+    left: 50%;
+    transform: translateX(-50%);
     display: flex;
     flex-direction: column;
     gap: 0.8rem;
-    width: 400px;
+    align-items: center;
+}
+
+.nav-buttons button {
+    width: 260px;
 }
 
 #message {
@@ -149,6 +170,83 @@ button.danger:hover {
     margin-bottom: 1.5rem;
     font-size: 0.85rem;
     text-align: center;
+}
+
+/* Panoul literelor - aceleasi dimensiuni ca my profile */
+.letters-panel {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.letters-container {
+    background: rgba(255, 255, 255, 0.015);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    padding: 2.5rem;
+    width: 420px;
+    border-radius: 20px;
+    box-shadow: 0 25px 60px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255,255,255,0.05);
+}
+
+.letters-title {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 1.5rem;
+    letter-spacing: 2px;
+    text-align: center;
+    margin-bottom: 2rem;
+    background: linear-gradient(90deg, #00d2ff, #3a7bd5);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+/* Grid trei coloane */
+#letters-list {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 0.55rem 1.5rem;
+}
+
+.letter-item {
+    font-size: 14px;
+    color: #ccc;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+/* Custom checkbox verde */
+.letter-item input[type="checkbox"] {
+    appearance: none;
+    -webkit-appearance: none;
+    width: 16px;
+    height: 16px;
+    border: 1.5px solid rgba(255, 255, 255, 0.25);
+    border-radius: 4px;
+    background: rgba(255, 255, 255, 0.05);
+    cursor: pointer;
+    position: relative;
+    flex-shrink: 0;
+    transition: border-color 0.2s, background 0.2s;
+}
+
+.letter-item input[type="checkbox"]:checked {
+    background: #00c853;
+    border-color: #00c853;
+}
+
+.letter-item input[type="checkbox"]:checked::after {
+    content: '';
+    position: absolute;
+    left: 4px;
+    top: 1px;
+    width: 5px;
+    height: 9px;
+    border: 2px solid #fff;
+    border-top: none;
+    border-left: none;
+    transform: rotate(45deg);
 }
 
 @keyframes fadeIn {
