@@ -9,19 +9,21 @@
 
 <div class="camera-container">
 
-    <video id="webcam" autoplay playsinline></video>
-
-    <canvas id="overlay"></canvas>
+    <div class="cameras-row">
+        <video id="webcam" autoplay playsinline></video>
+        <canvas id="overlay"></canvas>
+    </div>
 
     <p id="predicted-letter">Letter: -</p>
 
     <p id="confidence">Confidence: -</p>
 
-    <button id="check-btn">Check Letter</button>
-
     <p id="message"></p>
 
-    <button id="back-btn">Back to Profile</button>
+    <div class="buttons-row">
+        <button id="back-btn">Back to Profile</button>
+        <button id="check-btn">Check Letter</button>
+    </div>
 
 </div>
 

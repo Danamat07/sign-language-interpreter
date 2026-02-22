@@ -21,7 +21,7 @@ const ALPHABET = [
 const chartData = {
     labels: ALPHABET,
     datasets: [{
-        label: 'Procent utilizatori care au bifat litera',
+        label: 'Percentage of users who checked the letter',
         data: Array(ALPHABET.length).fill(0),
         backgroundColor: 'rgba(54, 162, 235, 0.7)',
         borderColor: 'rgba(54, 162, 235, 1)',
@@ -44,7 +44,8 @@ const statsChart = new Chart(ctx, {
         },
         plugins: {
             legend: {
-                display: true
+                display: true,
+                onClick: null  // dezactivează toggle-ul la click pe legendă
             },
             tooltip: {
                 callbacks: {

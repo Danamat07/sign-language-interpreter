@@ -11,9 +11,12 @@ body {
     color: #e0e0e0;
     font-family: 'Inter', sans-serif;
     min-height: 100vh;
+    height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
+    padding: 12px 12px 28px 12px;
+    overflow: hidden;
 }
 
 .background-glow {
@@ -30,45 +33,83 @@ body {
 h1 {
     font-family: 'Orbitron', sans-serif;
     text-align: center;
-    margin-bottom: 2rem;
+    margin-bottom: 1rem;
     letter-spacing: 2px;
+    font-size: 1.2rem;
     background: linear-gradient(90deg, #00d2ff, #3a7bd5);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
 }
 
+/* Camera container */
+.camera-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    max-width: 960px;
+    gap: 10px;
+}
+
+/* Cameras row: video + overlay side by side */
+.cameras-row {
+    display: flex;
+    flex-direction: row;
+    gap: 16px;
+    justify-content: center;
+    align-items: flex-start;
+    width: 100%;
+}
+
+#webcam,
+#overlay {
+    width: clamp(367px, 41vw, 562px);
+    height: clamp(275px, 31vw, 421px);
+    border-radius: 10px;
+    border: 1px solid rgba(0, 210, 255, 0.2);
+    background: rgba(0, 0, 0, 0.4);
+    display: block;
+    object-fit: cover;
+}
+
 #predicted-letter {
     font-family: 'Inter', sans-serif;
-    font-size: 2rem;
+    font-size: 1.4rem;
     font-weight: 600;
     text-align: center;
-    margin-top: 1rem;
     color: rgba(0, 210, 255, 0.6);
     letter-spacing: 1px;
 }
 
 #confidence {
     font-family: 'Inter', sans-serif;
-    font-size: 1.1rem;
+    font-size: 0.95rem;
     font-weight: 600;
     text-align: center;
-    margin-top: 0.4rem;
     color: rgba(0, 210, 255, 0.6);
     letter-spacing: 1px;
+}
+
+#message {
+    font-size: 0.9rem;
+    text-align: center;
+    color: rgba(255, 255, 255, 0.5);
+    min-height: 1.2em;
 }
 
 button {
     display: block;
     width: auto;
-    min-width: 200px;
-    padding: 12px 28px;
-    margin: 10px auto 0 auto;
+    min-width: 160px;
+    padding: 9px 22px;
+    margin: 0 auto;
     background: rgba(0, 210, 255, 0.08);
     color: #00d2ff;
     border: 1px solid rgba(0, 210, 255, 0.3);
-    border-radius: 12px;
+    border-radius: 10px;
     font-weight: 600;
     font-family: 'Inter', sans-serif;
+    font-size: 0.85rem;
     text-transform: uppercase;
     letter-spacing: 1px;
     cursor: pointer;
@@ -86,4 +127,14 @@ button:hover {
 
 button:active {
     transform: translateY(0);
+}
+
+/* Buttons side by side */
+.buttons-row {
+    display: flex;
+    flex-direction: row;
+    gap: 12px;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
 }
