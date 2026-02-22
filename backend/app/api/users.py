@@ -173,23 +173,60 @@ def get_statistics(user=Depends(verify_firebase_token)):
 def delete_account(user=Depends(verify_firebase_token)):
 
     try:
-        # delete firebase auth
-        auth.delete_user(user["uid"])
 
-        # delete firestore user
-        db.collection("users").document(user["uid"]).delete()
+        uid = user["uid"]
+
+        user_ref = db.collection("users").document(uid)
+        user_doc = user_ref.get()
+
+        if user_doc.exists:
+
+            user_data = user_doc.to_dict()
+            recognized_letters = user_data.get("recognizedLetters", {})
+
+            # decrement global statistics
+            for letter, recognized in recognized_letters.items():
+
+                if recognized:
+
+                    db.collection("statistics").document("global").set({
+
+                        letter: firestore.Increment(-1)
+
+                    }, merge=True)
+
+            # delete history subcollection
+            history_docs = user_ref.collection("history").stream()
+
+            for doc in history_docs:
+
+                doc.reference.delete()
+
+            # delete firestore user document
+            user_ref.delete()
+
+        # delete firebase auth user
+        auth.delete_user(uid)
 
         # decrement total users count
         db.collection("metadata").document("usersCount").set({
+
             "total": firestore.Increment(-1)
+
         }, merge=True)
 
         return {
-            "message": "Account deleted"
+
+            "message": "Account deleted successfully"
+
         }
 
     except Exception as e:
+
         raise HTTPException(
+
             status_code=400,
+
             detail=str(e)
+
         )
