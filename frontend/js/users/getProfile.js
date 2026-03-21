@@ -1,173 +1,57 @@
 import { API_BASE_URL } from "../config/api.js";
 
-
 const usernameEl = document.getElementById("username");
-
 const emailEl = document.getElementById("email");
-
-const lettersList = document.getElementById("letters-list");
-
 const message = document.getElementById("message");
-
 
 const token = localStorage.getItem("firebaseToken");
 
-
 if (!token) {
-
     window.location.href = "index.html";
-
 }
-
-
-
-const ALPHABET = [
-
-"A","B","C","D","E",
-
-"F","G","H","I",
-
-"K","L","M","N","O",
-
-"P","Q","R","S","T",
-
-"U","V","W","X","Y"
-
-];
-
-
-
-function renderLetters(recognizedLetters) {
-
-    lettersList.innerHTML = "";
-
-
-    ALPHABET.forEach(letter => {
-
-
-        const checked = recognizedLetters[letter];
-
-
-        const item = document.createElement("div");
-
-        item.className = "letter-item";
-
-
-        item.innerHTML = `
-
-            <label>
-
-                <input type="checkbox"
-
-                       disabled
-
-                       ${checked ? "checked" : ""}>
-
-                ${letter}
-
-            </label>
-
-        `;
-
-
-        lettersList.appendChild(item);
-
-    });
-
-}
-
-
 
 async function loadProfile() {
-
-
     try {
-
-
         const response = await fetch(
-
             `${API_BASE_URL}/users/me`,
-
             {
-
                 method: "GET",
-
                 headers: {
-
                     "Authorization": `Bearer ${token}`
-
                 }
-
             }
-
         );
-
 
         const data = await response.json();
 
-
         if (!response.ok) {
-
             throw new Error(
-
-                data.detail ||
-
-                "Failed to load profile"
-
+                data.detail || "Failed to load profile"
             );
-
         }
 
+        // ✅ SAFE DOM updates
+        if (usernameEl) {
+            usernameEl.textContent = data.username || "";
+        }
 
-        usernameEl.textContent = data.username;
+        if (emailEl) {
+            emailEl.textContent = data.email || "";
+        }
 
-        emailEl.textContent = data.email;
+    } catch (error) {
 
+        if (message) {
+            message.textContent = error.message;
+            message.style.color = "red";
+        }
 
-        renderLetters(
+        localStorage.removeItem("firebaseToken");
 
-            data.recognizedLetters
-
-        );
-
-
+        setTimeout(() => {
+            window.location.href = "index.html";
+        }, 1500);
     }
-
-
-    catch (error) {
-
-
-        message.textContent = error.message;
-
-        message.style.color = "red";
-
-
-        localStorage.removeItem(
-
-            "firebaseToken"
-
-        );
-
-
-        setTimeout(
-
-            () => {
-
-                window.location.href =
-
-                "index.html";
-
-            },
-
-            1500
-
-        );
-
-
-    }
-
 }
-
-
 
 loadProfile();

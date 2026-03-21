@@ -10,7 +10,7 @@ This is the core ML logic for inference.
 
 # paths
 BASE_DIR = Path(__file__).resolve().parent.parent.parent
-MODEL_PATH = BASE_DIR / "models" / "cnn_model.keras"
+MODEL_PATH = BASE_DIR / "models" / "mobilenetv2_model_final.keras"
 CLASSES_PATH = BASE_DIR / "models" / "classes.json"
 
 # load model

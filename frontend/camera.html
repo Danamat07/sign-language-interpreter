@@ -10,7 +10,9 @@
 <div class="camera-container">
 
     <div class="cameras-row">
+        <!-- start webcam, show live image, ai source -->
         <video id="webcam" autoplay playsinline></video>
+        <!-- draw image processed by backend, bounding box, landmarks, image returned by predict -->
         <canvas id="overlay"></canvas>
     </div>
 

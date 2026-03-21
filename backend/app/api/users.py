@@ -34,8 +34,8 @@ def signup(email: str, password: str, username: str):
             display_name=username
         )
 
-        # initialize recognized letters
-        recognized_letters = {
+        # initialize progress
+        progress = {
             letter: False for letter in ALPHABET
         }
 
@@ -44,14 +44,9 @@ def signup(email: str, password: str, username: str):
 
             "email": email,
             "username": username,
-            "recognizedLetters": recognized_letters
+            "progress": progress
 
         })
-
-        # increment total users count
-        db.collection("metadata").document("usersCount").set({
-            "total": firestore.Increment(1)
-        }, merge=True)
 
         return {
             "message": "User created successfully"
@@ -97,75 +92,41 @@ def forgot_password(email: str):
         )
 
 
-# SAVE RECOGNIZED LETTER
+# SAVE PROGRESS
 @router.post("/recognize-letter")
 def recognize_letter(data: dict, user=Depends(verify_firebase_token)):
 
     letter = data.get("letter")
 
     if letter not in ALPHABET:
-        raise HTTPException(
-            status_code=400,
-            detail="Invalid letter"
-        )
+        raise HTTPException(status_code=400, detail="Invalid letter")
 
     user_ref = db.collection("users").document(user["uid"])
     user_doc = user_ref.get()
 
     if not user_doc.exists:
-        raise HTTPException(
-            status_code=404,
-            detail="User not found"
-        )
+        raise HTTPException(status_code=404, detail="User not found")
 
     user_data = user_doc.to_dict()
 
-    # prevent duplicate counting
-    if user_data["recognizedLetters"].get(letter):
-        return {
-            "message": "Letter already saved"
-        }
+    recognized = user_data.get("recognizedLetters", {})
 
-    # update user progress
+    # dacă deja e true
+    if recognized.get(letter):
+        return {"message": "Letter already learned"}
+
+    # update direct în recognizedLetters
     user_ref.update({
         f"recognizedLetters.{letter}": True
     })
 
-    # save history for user's personal tracking
+    # history (opțional, dar util)
     user_ref.collection("history").add({
         "letter": letter,
         "timestamp": firestore.SERVER_TIMESTAMP
     })
 
-    # update global statistics – simple count only
-    db.collection("statistics").document("global").set({
-        letter: firestore.Increment(1)
-    }, merge=True)
-
-    return {
-        "message": "Letter saved successfully"
-    }
-
-
-# GET GLOBAL STATISTICS
-@router.get("/statistics")
-def get_statistics(user=Depends(verify_firebase_token)):
-
-    user_doc = db.collection("users").document(user["uid"]).get()
-    stats_doc = db.collection("statistics").document("global").get()
-    metadata_doc = db.collection("metadata").document("usersCount").get()
-
-    if not user_doc.exists:
-        raise HTTPException(
-            status_code=404,
-            detail="User not found"
-        )
-
-    return {
-        "userProgress": user_doc.to_dict()["recognizedLetters"],
-        "globalStats": stats_doc.to_dict(),
-        "totalUsers": metadata_doc.to_dict()["total"]
-    }
+    return {"message": "Letter marked as learned"}
 
 
 # DELETE – DELETE ACCOUNT
@@ -175,31 +136,15 @@ def delete_account(user=Depends(verify_firebase_token)):
     try:
 
         uid = user["uid"]
-
         user_ref = db.collection("users").document(uid)
         user_doc = user_ref.get()
 
         if user_doc.exists:
 
-            user_data = user_doc.to_dict()
-            recognized_letters = user_data.get("recognizedLetters", {})
-
-            # decrement global statistics
-            for letter, recognized in recognized_letters.items():
-
-                if recognized:
-
-                    db.collection("statistics").document("global").set({
-
-                        letter: firestore.Increment(-1)
-
-                    }, merge=True)
-
             # delete history subcollection
             history_docs = user_ref.collection("history").stream()
 
             for doc in history_docs:
-
                 doc.reference.delete()
 
             # delete firestore user document
@@ -208,25 +153,13 @@ def delete_account(user=Depends(verify_firebase_token)):
         # delete firebase auth user
         auth.delete_user(uid)
 
-        # decrement total users count
-        db.collection("metadata").document("usersCount").set({
-
-            "total": firestore.Increment(-1)
-
-        }, merge=True)
-
         return {
-
             "message": "Account deleted successfully"
-
         }
 
     except Exception as e:
 
         raise HTTPException(
-
             status_code=400,
-
             detail=str(e)
-
         )

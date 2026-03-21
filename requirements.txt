@@ -1,15 +1,15 @@
 
-numpy==1.24.3 
-opencv-python
-tensorflow==2.13.0 
-scikit-learn
-mediapipe==0.10.11
-PySide6
-pyttsx3
-pillow
-tqdm
-firebase-admin
-fastapi
-uvicorn
-python-multipart
-python-dotenv
+numpy==1.24.3       # Numerical computing and array manipulation.
+opencv-python       # Image processing and computer vision.
+tensorflow==2.13.0  # Deep learning model loading and prediction.
+scikit-learn        # Machine learning utilities and label encoding.
+mediapipe==0.10.11  # Hand tracking and landmark detection.
+PySide6             # Desktop graphical user interface framework.
+pyttsx3             # Text-to-speech conversion.
+pillow              # Image loading and processing.
+tqdm                # Progress bar for loops and training.
+firebase-admin      # Firebase authentication and Firestore database access.
+fastapi             # Backend REST API framework.
+uvicorn             # ASGI server for running FastAPI.
+python-multipart    # File upload handling.
+python-dotenv       # Environment variable management.

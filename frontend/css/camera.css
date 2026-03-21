@@ -138,3 +138,16 @@ button:active {
     align-items: center;
     width: 100%;
 }
+
+#tutorial-image {
+    width: clamp(367px, 41vw, 562px);
+    height: clamp(275px, 31vw, 421px);
+    object-fit: contain;
+    border-radius: 10px;
+    border: 1px solid rgba(0, 210, 255, 0.2);
+    background: rgba(0, 0, 0, 0.4);
+}
+
+#overlay {
+    transform: scaleX(-1);
+}
