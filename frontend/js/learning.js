@@ -91,3 +91,11 @@ loadProgress();
 backBtn.addEventListener("click", () => {
     window.location.href = "profile.html";
 });
+
+// DYNAMIC LETTERS CLICK (J, Z)
+document.querySelectorAll(".dynamic-card").forEach(card => {
+    card.addEventListener("click", () => {
+        const letter = card.dataset.letter;
+        window.location.href = `dynamic-letter.html?letter=${letter}`;
+    });
+});

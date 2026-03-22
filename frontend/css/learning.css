@@ -13,6 +13,9 @@ body {
     width: 100%;
     max-width: 900px;
     text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 h1 {
@@ -69,20 +72,8 @@ h1 {
     border-color: rgba(0, 255, 156, 0.4);
 }
 
-/* BUTTON */
-/* button {
-    margin-top: 25px;
-    padding: 10px 20px;
-    border-radius: 8px;
-    border: none;
-    background: #00d2ff;
-    color: black;
-    font-weight: bold;
-    cursor: pointer;
-} */
-
 button {
-    margin-top: 25px;
+    margin-top: 30px;
     width: 260px;
     padding: 13px;
     background: rgba(0, 210, 255, 0.08);
@@ -108,4 +99,59 @@ button:hover {
 
 button:active {
     transform: translateY(0);
+}
+
+/* LAYOUT GENERAL */
+.learning-wrapper {
+    display: flex;
+    gap: 3rem;
+    align-items: flex-start;
+}
+
+/* BACK BUTTON LEFT */
+.back-fixed {
+    position: fixed;
+    left: 30px;
+    bottom: 30px;
+}
+
+/* DYNAMIC PANEL */
+.dynamic-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 150px;
+}
+
+.dynamic-container h2 {
+    font-family: 'Orbitron';
+    margin-bottom: 20px;
+    color: #b388ff;
+}
+
+/* CARDS J Z */
+.dynamic-letters {
+    display: flex;
+    gap: 20px;
+}
+
+.dynamic-card {
+    width: 80px;
+    height: 80px;
+    background: rgba(179, 136, 255, 0.15);
+    border: 1px solid rgba(179, 136, 255, 0.5);
+    border-radius: 12px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2rem;
+    font-weight: bold;
+    color: #b388ff;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.dynamic-card:hover {
+    transform: translateY(-4px);
+    background: rgba(179, 136, 255, 0.25);
 }
