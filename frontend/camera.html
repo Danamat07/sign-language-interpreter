@@ -10,21 +10,36 @@
 <div class="camera-container">
 
     <div class="cameras-row">
-        <!-- start webcam, show live image, ai source -->
-        <video id="webcam" autoplay playsinline></video>
-        <!-- draw image processed by backend, bounding box, landmarks, image returned by predict -->
+
         <canvas id="overlay"></canvas>
+
+        <!-- RIGHT PANEL -->
+        <div class="right-panel">
+
+            <p id="target-letter">Game Instructions</p>
+
+            <div class="game-info">
+                <p id="game-streak">Streak: 0</p>
+                <p id="game-timer">Time: 60s</p>
+                <p id="game-highscore">Highscore: 0</p>
+            </div>
+
+            <p id="game-letter"></p>
+
+            <div id="instructions-box"></div>
+
+        </div>
+
     </div>
 
     <p id="predicted-letter">Letter: -</p>
-
     <p id="confidence">Confidence: -</p>
-
     <p id="message"></p>
 
     <div class="buttons-row">
         <button id="back-btn">Back to Profile</button>
-        <button id="check-btn">Check Letter</button>
+        <button id="start-game-btn">Start Game</button>
+        <button id="speech-btn">Speech: OFF</button>
     </div>
 
 </div>

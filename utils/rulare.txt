@@ -2,6 +2,8 @@ backend:
 
 C:/Users/Dell/source/SignLanguageInterpreter/venv/Scripts/Activate.ps1
 uvicorn backend.app.main:app --reload
+http://127.0.0.1:8000
+http://127.0.0.1:8000/docs
 
 frontend:
 

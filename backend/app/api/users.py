@@ -163,3 +163,30 @@ def delete_account(user=Depends(verify_firebase_token)):
             status_code=400,
             detail=str(e)
         )
+
+
+# SAVE GAME SCORE
+@router.post("/save-score")
+def save_score(data: dict, user=Depends(verify_firebase_token)):
+
+    score = data.get("score", 0)
+
+    user_ref = db.collection("users").document(user["uid"])
+    user_doc = user_ref.get()
+
+    if not user_doc.exists:
+        raise HTTPException(status_code=404, detail="User not found")
+
+    user_data = user_doc.to_dict()
+
+    current_highscore = user_data.get("highscore", 0)
+
+    # update only if better
+    if score > current_highscore:
+        user_ref.update({
+            "highscore": score
+        })
+
+    return {
+        "message": "Score processed"
+    }
