@@ -30,7 +30,7 @@ form.addEventListener("submit", async (e) => {
             "Redirecting to password reset page...";
         message.style.color = "lightgreen";
 
-        // 🔥 DESCHIDEM LINK-UL DE RESET (RESET REAL)
+        // DESCHIDEM LINK-UL DE RESET (RESET REAL)
         setTimeout(() => {
             window.open(data.reset_link, "_blank");
         }, 1000);
