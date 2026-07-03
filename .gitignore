@@ -16,10 +16,10 @@ venv/
 .DS_Store
 Thumbs.db
 
-# Models & data (vor fi generate ulterior)
-backend/models/*.keras
-backend/models/*.json
-data/
+# # Models & data (vor fi generate ulterior)
+# backend/models/*.keras
+# backend/models/*.json
+# data/
 
 # firebase key
 backend/app/config
