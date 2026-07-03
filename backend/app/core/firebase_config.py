@@ -1,4 +1,5 @@
 import os
+import json
 from dotenv import load_dotenv
 import firebase_admin
 from firebase_admin import credentials, firestore
@@ -8,19 +9,17 @@ Initializes Firebase Admin SDK once.
 Provides Firestore client db to use in APIs.
 """
 
-# load environment variables from .env file
 load_dotenv()
 
-# path to firebase admin SDK json key
-FIREBASE_CRED_PATH = os.getenv("FIREBASE_CRED_PATH")
+firebase_credentials = os.getenv("FIREBASE_CREDENTIALS")
 
-if not FIREBASE_CRED_PATH:
-    raise RuntimeError("FIREBASE_CRED_PATH is not set")
+if not firebase_credentials:
+    raise RuntimeError("FIREBASE_CREDENTIALS is not set")
 
-# initialize firebase admin SDK only if not already initialized
+cred_dict = json.loads(firebase_credentials)
+
 if not firebase_admin._apps:
-    cred = credentials.Certificate(FIREBASE_CRED_PATH)
+    cred = credentials.Certificate(cred_dict)
     firebase_admin.initialize_app(cred)
 
-# firestore client for database operations
 db = firestore.client()
